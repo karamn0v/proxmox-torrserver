@@ -15,8 +15,8 @@ MEM=${MEM:-512}
 CORE=${CORE:-1}
 BRIDGE=${BRIDGE:-vmbr0}
 NET=${NET:-dhcp}
-STORAGE=${STORAGE:-local}
-IMG="local:vztmpl/debian-12-standard_12.12-1_amd64.tar.zst"
+STORAGE=${STORAGE:-local-lvm}
+IMG="local-lvm:vztmpl/debian-12-standard_12.12-1_amd64.tar.zst"
 
 echo -e "\n>>> Creating LXC for $APP (CTID=$CTID)\n"
 
