@@ -15,6 +15,7 @@ MEM=${MEM:-512}
 CORE=${CORE:-1}
 BRIDGE=${BRIDGE:-vmbr0}
 NET=${NET:-dhcp}
+STORAGETEMP=${STORAGETEMP:-local}
 STORAGE=${STORAGE:-local-lvm}
 IMG="local:vztmpl/debian-12-standard_12.12-1_amd64.tar.zst"
 
@@ -24,13 +25,13 @@ echo -e "\n>>> Creating LXC for $APP (CTID=$CTID)\n"
 if ! pveam list $STORAGE | grep -q "debian-12"; then
     echo ">>> Downloading Debian 12 template..."
     pveam update
-    pveam download $STORAGE debian-12-standard_12.12-1_amd64.tar.zst
+    pveam download $STORAGETEMP debian-12-standard_12.12-1_amd64.tar.zst
 fi
 
 # --- Create container ---
 pct create $CTID $IMG \
     -hostname $HN \
-    -storage $STORAGE \
+    -storage $STORAGETEMP \
     -rootfs ${STORAGE}:${DISK_SIZE} \
     -memory $MEM \
     -cores $CORE \
