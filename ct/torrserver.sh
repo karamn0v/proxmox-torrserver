@@ -10,7 +10,7 @@ set -e
 APP="torrserver"
 CTID=${CTID:-9001}
 HN=${HN:-torrserver}
-DISK_SIZE=${DISK_SIZE:-4}
+DISK_SIZE=${DISK_SIZE:-2}
 MEM=${MEM:-512}
 CORE=${CORE:-1}
 BRIDGE=${BRIDGE:-vmbr0}
