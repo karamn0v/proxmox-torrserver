@@ -22,11 +22,17 @@ IMG="local:vztmpl/debian-12-standard_12.12-1_amd64.tar.zst"
 echo -e "\n>>> Creating LXC for $APP (CTID=$CTID)\n"
 
 # --- Template check ---
-#if ! pveam list $STORAGE | grep -q "debian-12"; then
-#    echo ">>> Downloading Debian 12 template..."
-#    pveam update
-#    pveam download $STORAGETEMP debian-12-standard_12.12-1_amd64.tar.zst
-#fi
+if ! pveam list $STORAGE | grep -q "debian-12"; then
+    # Если шаблон не найден, выполняем следующие действия:
+    
+    echo ">>> Downloading Debian 12 template..."
+    
+    # Обновляем список доступных шаблонов
+    pveam update
+    
+    # Загружаем шаблон Debian 12
+    pveam download $STORAGETEMP debian-12-standard_12.12-1_amd64.tar.zst
+fi
 
 # --- Create container ---
 pct create $CTID $IMG \
